@@ -22,8 +22,5 @@
 (defn save-return [obj coll]
   (mc/save-and-return db coll obj))
 
-(defn find-one-as-map [obj coll]
-  (mc/find-one-as-map db coll obj))
-
 (defn delete [obj coll]
   (mc/remove db coll obj))

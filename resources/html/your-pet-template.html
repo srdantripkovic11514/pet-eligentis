@@ -22,13 +22,12 @@
 <body>
     <div class="container">
         <div class="center">
-            <form action="/pet/yourpet" method="POST">
-                {% csrf-field %}
-                <p>Pet: <input type="text" id="pet" name="pet" /></p>
-                <p>Breed: <input type="text" id="breed" name="breed" /></p>
-                <p>Age: <input type="text" id="age" name="age" /></p>
-                <p>Name: <input type="text" id="name" name="name" /></p>
-                <p><button type="submit">Register pet</button></p>
+            <form action="/" method="GET">
+                <p>Pet: {{pet}}</p>
+                <p>Breed: {{breed}}</p>
+                <p>Age: {{age}}</p>
+                <p>Name: {{name}}</p>
+                <p><button type="submit">To home page</button></p>
             </form>
         </div>
     </div>

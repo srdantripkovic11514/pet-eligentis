@@ -4,7 +4,8 @@
    [clojure.java.io :as io]
    [pet-eligentis.db.core :as db]
    [pet-eligentis.middleware :as middleware]
-   [ring.util.http-response :as response]))
+   [ring.util.http-response :as response]
+   [selmer.parser :refer [render-file]]))
 
 (defn home-page [request]
   (layout/render request "home.html"))
@@ -58,13 +59,30 @@
                                  [:password password]]) "users")
             (layout/render request "signin.html")))))
 
+;(defn your-pet [request]
+;  (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
+;  (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet-template.html"
+;        (render-file "your-pet.html" {:pet pet
+;                                      :breed breed
+;                                      :age age
+;                                      :name name}))
+;  (layout/render request "your-pet.html"))
+
 (defn new-pet-page [request]
   (let [{{pet :pet breed :breed age :age name :name} :params} request]
-    (db/create (into {} [[:owner ]
+    (println (get-in request [:cookies "username" :value]))
+    (db/create (into {} [[:owner (get-in request [:cookies "username" :value])]
                          [:pet pet]
                          [:breed breed]
                          [:age age]
-                         [:name name]] "pets"))))
+                         [:name name]]) "pets")
+    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
+    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
+          (render-file "your-pet-template.html" {:pet pet
+                                        :breed breed
+                                        :age age
+                                        :name name}))
+    (layout/render request "your-pet.html")))
 
 (defn logout [request]
   (remove-user! request))

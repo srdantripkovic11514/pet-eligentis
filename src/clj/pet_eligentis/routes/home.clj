@@ -7,15 +7,22 @@
    [ring.util.http-response :as response]))
 
 (defn home-page [request]
-  (layout/render request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (layout/render request "home.html"))
 
 (defn about-page [request]
   (layout/render request "about.html"))
 
+(defn pet-page [request]
+  (layout/render request "pet.html"))
+
 (defn signin-page [request]
+  (println (get request :cookies))
   (if (contains? (get request :cookies) "username")
     (home-page request)
     (layout/render request "signin.html")))
+
+(defn signin-cookie [request]
+  (layout/render request "signin.html"))
 
 (defn signup-page [request]
   (layout/render request "signup.html"))
@@ -26,7 +33,7 @@
       (assoc :cookies {"username" {:value id, :max-age 3600}})))
 
 (defn remove-user! [request]
-  (-> (signin-page request)
+  (-> (signin-cookie request)
       (assoc :session (dissoc (get request :session) :user))
       (assoc :cookies {"username" {:max-age 0}})))
 
@@ -51,6 +58,14 @@
                                  [:password password]]) "users")
             (layout/render request "signin.html")))))
 
+(defn new-pet-page [request]
+  (let [{{pet :pet breed :breed age :age name :name} :params} request]
+    (db/create (into {} [[:owner ]
+                         [:pet pet]
+                         [:breed breed]
+                         [:age age]
+                         [:name name]] "pets"))))
+
 (defn logout [request]
   (remove-user! request))
 
@@ -64,5 +79,7 @@
    ["/signin" {:get signin-page
                :post signup}]
    ["/signup" {:get signup-page}]
-   ["/logout" {:get logout}]])
+   ["/logout" {:get logout}]
+   ["/pet" {:get pet-page}]
+   ["/pet/yourpet" {:post new-pet-page}]])
 

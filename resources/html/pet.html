@@ -1,0 +1,37 @@
+<html>
+<style>
+    .container {
+        height: 720px;
+        position: relative;
+    }
+
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="/css/pet_style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="center">
+            <form action="/pet/yourpet" method="POST">
+                {% csrf-field %}
+                <p>Pet: <input type="text" id="fname" name="fname" /></p>
+                <p>Breed: <input type="text" id="lname" name="lname" /></p>
+                <p>Age: <input type="text" id="email" name="email" /></p>
+                <p>Name: <input type="text" id="" name="email" /></p>
+                <p><button type="submit">Register pet</button></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

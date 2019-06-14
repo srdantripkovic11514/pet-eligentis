@@ -17,8 +17,8 @@
   (layout/render request "pet.html"))
 
 (defn signin-page [request]
-  (println (get request :cookies))
-  (if (contains? (get request :cookies) "username")
+  (if (or (contains? (get-in request [:session]) :user)
+          (contains? (get request :cookies) "username"))
     (home-page request)
     (layout/render request "signin.html")))
 
@@ -30,7 +30,7 @@
 
 (defn set-user! [id {session :session} request]
   (-> (home-page request)
-      ;(assoc :session (assoc session :user id))
+      (assoc :session (assoc session :user id))
       (assoc :cookies {"username" {:value id, :max-age 3600}})))
 
 (defn remove-user! [request]
@@ -79,9 +79,9 @@
     (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
     (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
           (render-file "your-pet-template.html" {:pet pet
-                                        :breed breed
-                                        :age age
-                                        :name name}))
+                                                 :breed breed
+                                                 :age age
+                                                 :name name}))
     (layout/render request "your-pet.html")))
 
 (defn logout [request]

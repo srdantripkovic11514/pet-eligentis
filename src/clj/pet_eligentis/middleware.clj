@@ -1,21 +1,22 @@
 (ns pet-eligentis.middleware
   (:require
-    [pet-eligentis.env :refer [defaults]]
-    [cheshire.generate :as cheshire]
-    [cognitect.transit :as transit]
-    [clojure.tools.logging :as log]
-    [pet-eligentis.layout :refer [error-page]]
-    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-    [pet-eligentis.middleware.formats :as formats]
-    [muuntaja.middleware :refer [wrap-format wrap-params]]
-    [pet-eligentis.config :refer [env]]
-    [ring.middleware.flash :refer [wrap-flash]]
-    [immutant.web.middleware :refer [wrap-session]]
-    [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
-    [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
-            [buddy.auth.accessrules :refer [restrict]]
-            [buddy.auth :refer [authenticated?]]
-    [buddy.auth.backends.session :refer [session-backend]])
+   [pet-eligentis.env :refer [defaults]]
+   [cheshire.generate :as cheshire]
+   [cognitect.transit :as transit]
+   [clojure.tools.logging :as log]
+   [pet-eligentis.layout :refer [error-page]]
+   [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+   [pet-eligentis.middleware.formats :as formats]
+   [muuntaja.middleware :refer [wrap-format wrap-params]]
+   [pet-eligentis.config :refer [env]]
+   [ring.middleware.flash :refer [wrap-flash]]
+   [immutant.web.middleware :refer [wrap-session]]
+   [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+   [ring.middleware.session.cookie :refer [cookie-store]]
+   [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+   [buddy.auth.accessrules :refer [restrict]]
+   [buddy.auth :refer [authenticated?]]
+   [buddy.auth.backends.session :refer [session-backend]])
   (:import 
            ))
 
@@ -68,5 +69,6 @@
       (wrap-defaults
         (-> site-defaults
             (assoc-in [:security :anti-forgery] false)
-            (dissoc :session)))
+            (assoc-in [:session :store] (cookie-store {:key "BuD3KgdAXhDHrJXu"}))
+            (assoc-in [:session [:cookie-name :max-age]] ["pet-eligentis-sessions" 10])))
       wrap-internal-error))

@@ -13,6 +13,7 @@
    [immutant.web.middleware :refer [wrap-session]]
    [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
    [ring.middleware.session.cookie :refer [cookie-store]]
+   [ring.middleware.session.store :as session-store]
    [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
    [buddy.auth.accessrules :refer [restrict]]
    [buddy.auth :refer [authenticated?]]
@@ -65,10 +66,10 @@
   (-> ((:middleware defaults) handler)
       wrap-auth
       wrap-flash
-      (wrap-session {:cookie-attrs {:http-only true}})
+      (wrap-session {:cookie-attrs {:http-only true :max-age 7200}})
       (wrap-defaults
-        (-> site-defaults
-            (assoc-in [:security :anti-forgery] false)
-            (assoc-in [:session :store] (cookie-store {:key "BuD3KgdAXhDHrJXu"}))
-            (assoc-in [:session [:cookie-name :max-age]] ["pet-eligentis-sessions" 10])))
+       (-> site-defaults
+           (assoc-in [:security :anti-forgery] false)
+           (assoc-in [:session :store] (cookie-store {:key "BuD3KgdAXhDHrJXu"}))
+           (assoc-in [:session [:cookie-name :max-age]] ["pet-eligentis-sessions" 10])))
       wrap-internal-error))

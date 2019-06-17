@@ -17,8 +17,7 @@
   (layout/render request "pet.html"))
 
 (defn signin-page [request]
-  (if (or (contains? (get-in request [:session]) :user)
-          (contains? (get request :cookies) "username"))
+  (if (or (contains? (get-in request [:session]) :user))
     (home-page request)
     (layout/render request "signin.html")))
 
@@ -31,12 +30,16 @@
 (defn set-user! [id {session :session} request]
   (-> (home-page request)
       (assoc :session (assoc session :user id))
-      (assoc :cookies {"username" {:value id, :max-age 3600}})))
+      (assoc :cookies {"username" {:value id, :max-age 7200}})
+      )
+  )
 
 (defn remove-user! [request]
   (-> (signin-cookie request)
       (assoc :session (dissoc (get request :session) :user))
-      (assoc :cookies {"username" {:max-age 0}})))
+      (assoc :cookies {"username" {:max-age 0}})
+      )
+  )
 
 ;(defn clear-session! []
  ; (-> (resp/response "Session cleared")
@@ -86,6 +89,10 @@
 
 (defn logout [request]
   (remove-user! request))
+
+;(defn find-pet [request]
+ ; (let [])
+  ;)
 
 (defn home-routes []
   [""

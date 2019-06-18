@@ -94,6 +94,9 @@
  ; (let [])
   ;)
 
+(defn pet-pref-page [request]
+  (layout/render request "pet-preferences.html"))
+
 (defn home-routes []
   [""
    {:middleware [middleware/wrap-csrf
@@ -106,5 +109,6 @@
    ["/signup" {:get signup-page}]
    ["/logout" {:get logout}]
    ["/pet" {:get pet-page}]
-   ["/pet/yourpet" {:post new-pet-page}]])
+   ["/pet/yourpet" {:post new-pet-page}]
+   ["/pet-preferences" {:get pet-pref-page}]])
 

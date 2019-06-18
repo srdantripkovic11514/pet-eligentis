@@ -94,8 +94,12 @@
  ; (let [])
   ;)
 
-(defn pet-pref-page [request]
-  (layout/render request "pet-preferences.html"))
+(defn pet-pref-dog-page [request]
+  (layout/render request "pet-preferences-dog.html"))
+
+  (defn pet-pref-cat-page [request]
+    (layout/render request "pet-preferences-cat.html"))
+  
 
 (defn home-routes []
   [""
@@ -110,5 +114,6 @@
    ["/logout" {:get logout}]
    ["/pet" {:get pet-page}]
    ["/pet/yourpet" {:post new-pet-page}]
-   ["/pet-preferences" {:get pet-pref-page}]])
+   ["/pet-preferences-dog" {:get pet-pref-dog-page}]
+   ["/pet-preferences-cat" {:get pet-pref-cat-page}]])
 

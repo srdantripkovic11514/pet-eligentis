@@ -90,7 +90,7 @@
 (defn logout [request]
   (remove-user! request))
 
-;(defn find-pet [request]
+;(defn find-dog [request]
  ; (let [])
   ;)
 

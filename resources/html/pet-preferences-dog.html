@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% block content %}
 
 <head>
     <link rel="stylesheet" href="/css/pet-pref-dog-style.css">
@@ -11,49 +11,49 @@
     <h1 style="text-align:center;color:rgb(134, 134, 134);font-size:35px;margin:80px 0  50px">Pet Eligentis - Finding your ideal dog</h1>
     <center>
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Do you have a fenced yard or any other closed space at your place?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="wanderlust-potential">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Are there any young kids living at your place?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="kid_friendly-mthnss">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How often are you able to walk your dog?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="exercise_need-weight_gain-intnsty">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How noisy is at your place?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="sensitivity">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">What will be the purpose of your future dog?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="dog_frnd-frnd_twrds_strngrs">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How much time would you be able to spend with your dog?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="being-alone">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How much does drooling bother you?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="drooling">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How much training would you like to do?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="easy_train-trnblty">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How much does fur bother you?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="amnt_shedd-easy_groom">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Are you looking for your dog to be a jogging companion?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="energy_level">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">How smart would you like your dog to be?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="intelligence">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">What size dog are you considering?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="size">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Have you already been an owner of a dog?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="novice_owners">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Do you have any other small animals?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="prey_drive">
         <br />
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Is it cold or hot where you live?</label>
-        <input type="range" min="1" max="5" value="3" class="focused">
+        <input type="range" min="1" max="5" value="3" class="focused" name="hot-cold">
         <br />
     </center>
 
@@ -62,4 +62,4 @@
 <script src="/vendor/jquery/jquery2-2-2.js"></script>
 <script src="/js/pet-pref.js"></script>
 
-</html>
+{% endblock %}

@@ -91,7 +91,7 @@
   (remove-user! request))
 
 ;(defn find-dog [request]
- ; (let [])
+ ; (let [{{wanderlust :wanderlust-potential} :params} request])
   ;)
 
 (defn pet-pref-dog-page [request]

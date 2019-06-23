@@ -24,3 +24,6 @@
 
 (defn delete [obj coll]
   (mc/remove db coll obj))
+
+(defn find-all [obj coll]
+  (mc/find-maps db coll obj))

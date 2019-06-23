@@ -10,6 +10,8 @@
 <body>
     <h1 style="text-align:center;color:rgb(134, 134, 134);font-size:35px;margin:80px 0  50px">Pet Eligentis - Finding your ideal dog</h1>
     <center>
+        <form action="/prefered-dog" method="POST">
+            {% csrf-field %}
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Do you have a fenced yard or any other closed space at your place?</label>
         <input type="range" min="1" max="5" value="3" class="focused" name="wanderlust-potential">
         <br />
@@ -55,6 +57,12 @@
         <label style="text-align:center;color:rgb(150,150,150);font-size:20px">Is it cold or hot where you live?</label>
         <input type="range" min="1" max="5" value="3" class="focused" name="hot-cold">
         <br />
+        <br />
+        <br />
+        <input type="submit" name="btn" class="btn-style" value="Find dog" />
+        <br />
+        <br />
+        </form>
     </center>
 
 </body>

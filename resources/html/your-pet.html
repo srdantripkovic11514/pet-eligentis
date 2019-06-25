@@ -1,36 +1,113 @@
-<html>
-<style>
-    .container {
-        height: 720px;
-        position: relative;
-    }
-
-    .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-</style>
+<!DOCTYPE html>
+<html style="background-image: url(/img/paw-background.png) !important; height: 100%; background-position: center; background-repeat: no-repeat;
+background-size: cover; background-attachment: fixed;">
 
 <head>
-    <link rel="stylesheet" href="/css/pet_style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pet Eligentis</title>
+
+  <!-- styles -->
+  <link href="/assets/bulma/css/bulma.min.css" rel="stylesheet" type="text/css" />
+  <link href="/assets/material-icons/css/material-icons.min.css" rel="stylesheet" type="text/css" />
+
+  <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+  <!-- navbar -->
+  <nav class="navbar is-info">
     <div class="container">
-        <div class="center">
-            <form action="/" method="GET">
-                <p>Pet: dog</p>
-                <p>Breed: Siberian husky</p>
-                <p>Age: 7</p>
-                <p>Name: Triton</p>
-                <p><button type="submit">To home page</button></p>
-            </form>
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/" style="font-weight:bold;">Pet Eligentis</a>
+        <span class="navbar-burger burger" data-target="nav-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-start">
+          <a href="/" class="navbar-item">Home</a>
+          <a href="/about" class="navbar-item">About</a>
+          <a href="/pet/yourpet" class="navbar-item">My Pet</a>
         </div>
+        <div class="navbar-end">
+          <a href="/signin" class="navbar-item">Sign in</a>
+          <a href="/logout" class="navbar-item">Logout</a>
+        </div>
+      </div>
     </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      
+
+<body>
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Pet</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>  
+                <th>dog</th>
+                <th>Stafford</th>
+                <th>9</th>
+                <th>Rocky</th>
+            </tr>
+            
+            <tr>  
+                <th>dog</th>
+                <th>akita</th>
+                <th>4</th>
+                <th>suki</th>
+            </tr>
+            
+            <tr>  
+                <th>cat</th>
+                <th>siamese</th>
+                <th>5</th>
+                <th>tsuki</th>
+            </tr>
+            
+            <tr>  
+                <th>dog</th>
+                <th>Siberian husky</th>
+                <th>7</th>
+                <th>Triton</th>
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
+
+
+
+    </div>
+  </section>
+
+  <!-- scripts -->
+  <script type="text/javascript">
+    (function () {
+      var burger = document.querySelector('.burger');
+      var nav = document.querySelector('#' + burger.dataset.target);
+      burger.addEventListener('click', function () {
+        burger.classList.toggle('is-active');
+        nav.classList.toggle('is-active');
+      });
+    })();
+  </script>
+
+
+  
+  
 </body>
 
 </html>

@@ -1,36 +1,28 @@
-<html>
-<style>
-    .container {
-        height: 720px;
-        position: relative;
-    }
-
-    .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-</style>
-
-<head>
-    <link rel="stylesheet" href="/css/pet_style.css">
-</head>
+{% extends "base.html" %}
+{% block content %}
 
 <body>
-    <div class="container">
-        <div class="center">
-            <form action="/" method="GET">
-                <p>Pet: {{pet}}</p>
-                <p>Breed: {{breed}}</p>
-                <p>Age: {{age}}</p>
-                <p>Name: {{name}}</p>
-                <p><button type="submit">To home page</button></p>
-            </form>
-        </div>
-    </div>
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Pet</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>  
+                <th>{{item.pet}}</th>
+                <th>{{item.breed}}</th>
+                <th>{{item.age}}</th>
+                <th>{{item.name}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 
-</html>
+
+{% endblock %}

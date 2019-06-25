@@ -58,7 +58,14 @@
                                  [:password password]]) "users")
             (layout/render request "signin.html")))))
 
-(defn new-pet-page [request]
+(defn show-pet [request]
+  (let [pet (db/find-all (into {} [[:owner (get-in request [:session :user])]]) "pets")]
+    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
+    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
+          (render-file "your-pet-template.html" {:items pet}))
+    (layout/render request "your-pet.html")))
+
+(defn new-pet [request]
   (let [{{pet :pet breed :breed age :age name :name} :params} request]
     (println (get-in request [:cookies "username" :value]))
     (db/create (into {} [[:owner (get-in request [:cookies "username" :value])]
@@ -66,13 +73,13 @@
                          [:breed breed]
                          [:age age]
                          [:name name]]) "pets")
-    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
-    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
-          (render-file "your-pet-template.html" {:pet pet
-                                                 :breed breed
-                                                 :age age
-                                                 :name name}))
-    (layout/render request "your-pet.html")))
+    ;(selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
+    ;(spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
+     ;     (render-file "your-pet-template.html" {:pet pet
+      ;                                           :breed breed
+       ;                                          :age age
+        ;                                         :name name}))
+    (show-pet request)))
 
 (defn logout [request]
   (remove-user! request))
@@ -204,13 +211,6 @@
 (defn pet-pref-cat-page [request]
   (layout/render request "pet-preferences-cat.html"))
 
-(defn show-pet [request]
-  (let [pet (db/find-all (into {} [[:owner (get-in request [:session :user])]]) "pets")]
-    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
-    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
-          (render-file "your-pet-template.html" {:items pet}))
-    (layout/render request "your-pet.html")))
-
 (defn your-pet-page [request]
   (if (or (contains? (get-in request [:session]) :user))
     (show-pet request)
@@ -228,7 +228,7 @@
    ["/signup" {:get signup-page}]
    ["/logout" {:get logout}]
    ["/pet" {:get pet-page}]
-   ["/pet/yourpet" {:post new-pet-page
+   ["/pet/yourpet" {:post new-pet
                     :get your-pet-page}]
    ["/pet-preferences-dog" {:get pet-pref-dog-page}]
    ["/pet-preferences-cat" {:get pet-pref-cat-page}]

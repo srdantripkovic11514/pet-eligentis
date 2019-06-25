@@ -2,6 +2,29 @@
 {% block content %}
 
 <body>
+    <div class="modal" id="myModal">
+        <form action="/pet/yourpet" method="POST">
+            {% csrf-field %}
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">New pet</p>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <p>Pet: <input class="input" type="text" id="pet" name="pet" /></p>
+                        <p>Breed: <input class="input" type="text" id="breed" name="breed" /></p>
+                        <p>Age: <input class="input" type="text" id="age" name="age" /></p>
+                        <p>Name: <input class="input" type="text" id="name" name="name" /></p>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button type="submit" class="button is-success">Save changes</button>
+                </footer>
+            </div>
+        </form>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
     <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
             <tr>
@@ -13,7 +36,7 @@
         </thead>
         <tbody>
             {% for item in items %}
-            <tr>  
+            <tr>
                 <th>{{item.pet}}</th>
                 <th>{{item.breed}}</th>
                 <th>{{item.age}}</th>
@@ -22,7 +45,9 @@
             {% endfor %}
         </tbody>
     </table>
+    <button class="button is-info is-normal modal-button" data-target="#myModal" aria-haspopup="true" id="showModal">Add
+        pet</button>
 </body>
 
-
+<script src="/js/modal.js"></script>
 {% endblock %}

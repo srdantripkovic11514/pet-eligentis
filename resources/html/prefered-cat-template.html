@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Affectionate with Family</th>
+                <th>Amount of Shedding</th>
+                <th>Intelligence</th>
+                <th>Kid Friendly</th>
+                <th>Pet Friendly</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <th>{{item.Name}}</th>
+                <th>{{item.Affectionate-with-Family}}</th>
+                <th>{{item.Amount-of-Shedding}}</th>
+                <th>{{item.Intelligence}}</th>
+                <th>{{item.Kid-Friendly}}</th>
+                <th>{{item.Pet-Friendly}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+
+{% endblock %}

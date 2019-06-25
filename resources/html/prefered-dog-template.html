@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Adaptability</th>
+                <th>All Around Friendliness</th>
+                <th>Exercise Needs</th>
+                <th>Health Grooming</th>
+                <th>Trainability</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>  
+                <th>{{item.Name}}</th>
+                <th>{{item.1Adaptability}}</th>
+                <th>{{item.1All-Around-Friendliness}}</th>
+                <th>{{item.1Exercise-Needs}}</th>
+                <th>{{item.1Health-Grooming}}</th>
+                <th>{{item.1Trainability}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+
+{% endblock %}

@@ -1,7 +1,10 @@
-html,
+html{
+  font-family: Roboto Slab;
+}
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Roboto Slab;
   background-image: url("/img/paw-background.png") no-repeat fixed 100%;
+  
 }
 @font-face {
   font-family: 'Material Icons';
@@ -32,6 +35,57 @@ body {
   text-rendering: optimizeLegibility;
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.image-box {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 480px;
+  float: left;
+}
+
+.image-box img {
+  max-width: 100%;
+  transition: all 0.3s;
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1);
+}
+
+.image-box:hover img {
+  transform: scale(1.1);
+}
+
+.image-box2 {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 380px;
+  float: right;
+}
+
+.image-box2 img {
+  max-width: 100%;
+  transition: all 0.3s;
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1);
+}
+
+.image-box2:hover img {
+  transform: scale(1.1);
 }
 
 

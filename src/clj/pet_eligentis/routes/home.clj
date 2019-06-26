@@ -60,10 +60,7 @@
 
 (defn show-pet [request]
   (let [pet (db/find-all (into {} [[:owner (get-in request [:session :user])]]) "pets")]
-    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
-    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
-          (render-file "your-pet-template.html" {:items pet}))
-    (layout/render request "your-pet.html")))
+    (layout/render request "your-pet-template.html" {:items pet})))
 
 (defn new-pet [request]
   (let [{{pet :pet breed :breed age :age name :name} :params} request]
@@ -73,12 +70,6 @@
                          [:breed breed]
                          [:age age]
                          [:name name]]) "pets")
-    ;(selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
-    ;(spit "C:/Users/Srdjan/pet-eligentis/resources/html/your-pet.html"
-     ;     (render-file "your-pet-template.html" {:pet pet
-      ;                                           :breed breed
-       ;                                          :age age
-        ;                                         :name name}))
     (show-pet request)))
 
 (defn logout [request]
@@ -94,64 +85,71 @@
                                                  (= 4 (read-string easy-train-trainability)) {$gte 2 $lte 5}
                                                  (= 3 (read-string easy-train-trainability)) {$gte 3 $lte 5}
                                                  (= 2 (read-string easy-train-trainability)) {$gte 4 $lte 5}
-                                                 :else 5)]
+                                                 :else {$gte 4 $lte 5})]
                            [:Amount-Of-Shedding (cond (= 1 (read-string shedding-easy-grooming)) {$gte 1 $lte 5}
                                                       (= 2 (read-string shedding-easy-grooming)) {$gte 1 $lte 4}
                                                       (= 3 (read-string shedding-easy-grooming)) {$gte 1 $lte 3}
                                                       (= 4 (read-string shedding-easy-grooming)) {$gte 1 $lte 2}
-                                                      :else 1)]
+                                                      :else {$gte 1 $lte 2})]
                            [:Tolerates-Being-Alone (cond (= 5 (read-string being-alone)) {$gte 1 $lte 5}
                                                          (= 4 (read-string being-alone)) {$gte 2 $lte 5}
                                                          (= 3 (read-string being-alone)) {$gte 3 $lte 5}
                                                          (= 2 (read-string being-alone)) {$gte 4 $lte 5}
-                                                         :else 5)]
+                                                         :else {$gte 4 $lte 5})]
                            [:Drooling-Potential (cond (= 1 (read-string drooling)) {$gte 1 $lte 5}
                                                       (= 2 (read-string drooling)) {$gte 1 $lte 4}
                                                       (= 3 (read-string drooling)) {$gte 1 $lte 3}
                                                       (= 4 (read-string drooling)) {$gte 1 $lte 2}
-                                                      :else 1)]
-                           [:Size (read-string size)]
+                                                      :else {$gte 1 $lte 2})]
+                           [:Size (cond (= 5 (read-string size)) {$gte 4 $lte 5}
+                                        (= 4 (read-string size)) {$gte 3 $lte 4}
+                                        (= 3 (read-string size)) {$gte 2 $lte 4}
+                                        (= 2 (read-string size)) {$gte 1 $lte 3}
+                                        :else {$gte 1 $lte 2})]
                            [:Tolerates-Cold-Weather (cond (= 5 (read-string hot-cold)) {$gte 1 $lte 5}
                                                           (= 4 (read-string hot-cold)) {$gte 2 $lte 5}
                                                           (= 3 (read-string hot-cold)) {$gte 3 $lte 5}
                                                           (= 2 (read-string hot-cold)) {$gte 4 $lte 5}
-                                                          :else 5)]
+                                                          :else {$gte 4 $lte 5})]
                            [:Tolerates-Hot-Weather (cond (= 1 (read-string hot-cold)) {$gte 1 $lte 5}
                                                          (= 2 (read-string hot-cold)) {$gte 2 $lte 5}
                                                          (= 3 (read-string hot-cold)) {$gte 3 $lte 5}
                                                          (= 4 (read-string hot-cold)) {$gte 4 $lte 5}
-                                                         :else 5)]
-                           [:Energy-Level (cond (= 1 (read-string energy-level)) {$gte 1 $lte 5}
-                                                (= 2 (read-string energy-level)) {$gte 2 $lte 5}
+                                                         :else {$gte 4 $lte 5})]
+                           [:Energy-Level (cond (= 1 (read-string energy-level)) {$gte 1 $lte 4}
+                                                (= 2 (read-string energy-level)) {$gte 2 $lte 4}
                                                 (= 3 (read-string energy-level)) {$gte 3 $lte 5}
                                                 (= 4 (read-string energy-level)) {$gte 4 $lte 5}
-                                                :else 5)]
-                           [:Intelligence (read-string intelligence)]
+                                                :else {$gte 4 $lte 5})]
+                           [:Intelligence (cond (= 5 (read-string intelligence)) {$gte 4 $lte 5}
+                                                (= 4 (read-string intelligence)) {$gte 3 $lte 4}
+                                                (= 3 (read-string intelligence)) {$gte 2 $lte 4}
+                                                :else {$gte 1 $lte 3})]
                            [:Prey-Drive (cond (= 1 (read-string prey_drive)) {$gte 1 $lte 5}
                                               (= 2 (read-string prey_drive)) {$gte 1 $lte 4}
                                               (= 3 (read-string prey_drive)) {$gte 1 $lte 3}
                                               (= 4 (read-string prey_drive)) {$gte 1 $lte 2}
-                                              :else 1)]
-                           [:Exercise-Needs (cond (= 5 (read-string exercise-weight-intensity)) {$gte 1 $lte 5}
+                                              :else {$gte 1 $lte 2})]
+                           [:Exercise-Needs (cond (= 5 (read-string exercise-weight-intensity)) {$gte 2 $lte 5}
                                                   (= 4 (read-string exercise-weight-intensity)) {$gte 1 $lte 4}
                                                   (= 3 (read-string exercise-weight-intensity)) {$gte 1 $lte 3}
                                                   (= 2 (read-string exercise-weight-intensity)) {$gte 1 $lte 2}
-                                                  :else 1)]
+                                                  :else {$gte 1 $lte 2})]
                            [:Sensitivity-Level (cond (= 1 (read-string sensitivity)) {$gte 1 $lte 5}
                                                      (= 2 (read-string sensitivity)) {$gte 1 $lte 4}
                                                      (= 3 (read-string sensitivity)) {$gte 1 $lte 3}
                                                      (= 4 (read-string sensitivity)) {$gte 1 $lte 2}
-                                                     :else 1)]
+                                                     :else {$gte 1 $lte 2})]
                            [:Incredibly-Kid-Friendly-Dogs (cond (= 1 (read-string kid-friendly-mouthiness)) {$gte 1 $lte 5}
                                                                 (= 2 (read-string kid-friendly-mouthiness)) {$gte 2 $lte 5}
                                                                 (= 3 (read-string kid-friendly-mouthiness)) {$gte 3 $lte 5}
                                                                 (= 4 (read-string kid-friendly-mouthiness)) {$gte 4 $lte 5}
-                                                                :else 5)]
+                                                                :else {$gte 4 $lte 5})]
                            [:Wanderlust-Potential (cond (= 1 (read-string wanderlust)) {$gte 1 $lte 5}
                                                         (= 2 (read-string wanderlust)) {$gte 1 $lte 4}
                                                         (= 3 (read-string wanderlust)) {$gte 1 $lte 3}
                                                         (= 4 (read-string wanderlust)) {$gte 1 $lte 2}
-                                                        :else 1)]]) "dogs")))
+                                                        :else {$gte 1 $lte 2})]]) "dogs")))
 
 (defn find-cat [request]
   (let [{{shedding :shedding tendency-vocalize :tendency_vocalize affec-family :affec_family
@@ -160,20 +158,20 @@
     (db/find-all (into {} [[:Affectionate-with-Family (cond (= 5 (read-string affec-family)) {$gte 4 $lte 5}
                                                             (= 4 (read-string affec-family)) {$gte 4 $lte 5}
                                                             (= 3 (read-string affec-family)) {$gte 3 $lte 4}
-                                                            :else {$gte 1 $lte 2})]
+                                                            :else {$gte 1 $lte 3})]
                            [:Amount-of-Shedding (cond (= 1 (read-string shedding)) {$gte 1 $lte 5}
                                                       (= 2 (read-string shedding)) {$gte 1 $lte 4}
                                                       (= 3 (read-string shedding)) {$gte 1 $lte 3}
                                                       (= 4 (read-string shedding)) {$gte 1 $lte 2}
-                                                      :else 1)]
-                           [:Friendly-Toward-Strangers (cond (= 1 (read-string frndly-twrds-strngrs)) {$gte 1 $lte 5}
+                                                      :else {$gte 1 $lte 2})]
+                           [$or [{ :Friendly-Toward-Strangers (cond (= 1 (read-string frndly-twrds-strngrs)) {$gte 1 $lte 5}
                                                              (= 2 (read-string frndly-twrds-strngrs)) {$gte 2 $lte 5}
                                                              (= 3 (read-string frndly-twrds-strngrs)) {$gte 3 $lte 5}
                                                              (= 4 (read-string frndly-twrds-strngrs)) {$gte 4 $lte 5}
-                                                             :else 5)]
+                                                             :else 5)} {:Friendly-Toward-Strangers {$exists false}}]]
                            [:Intelligence (cond (= 5 (read-string intelligence)) {$gte 1 $lte 5}
                                                 (= 4 (read-string intelligence)) {$gte 1 $lte 4}
-                                                :else {$gte 1 $lte 3})]
+                                                :else {$gte 1 $lte 4})]
                            [:Kid-Friendly (cond (= 1 (read-string kid-frndly)) {$gte 1 $lte 5}
                                                 (= 2 (read-string kid-frndly)) {$gte 2 $lte 5}
                                                 (= 3 (read-string kid-frndly)) {$gte 3 $lte 5}
@@ -183,27 +181,25 @@
                                                 (= 2 (read-string pet-frndly)) {$gte 2 $lte 5}
                                                 (= 3 (read-string pet-frndly)) {$gte 3 $lte 5}
                                                 (= 4 (read-string pet-frndly)) {$gte 4 $lte 5}
-                                                :else 5)]
-                           [:Potential-for-Playfulness (read-string poten-playful)]
-                           [:Tendency-to-Vocalize (cond (= 5 (read-string tendency-vocalize)) {$gte 1 $lte 5}
+                                                :else {$gte 4 $lte 5})]
+                           [:Potential-for-Playfulness (cond (= 5 (read-string poten-playful)) {$gte 4 $lte 5}
+                                                             (= 4 (read-string poten-playful)) {$gte 3 $lte 5}
+                                                             (= 3 (read-string poten-playful)) {$gte 2 $lte 4}
+                                                             :else {$gte 1 $lte 3})]
+                           [$or [{ :Tendency-to-Vocalize (cond (= 5 (read-string tendency-vocalize)) {$gte 1 $lte 5}
                                                         (= 4 (read-string tendency-vocalize)) {$gte 1 $lte 4}
                                                         (= 3 (read-string tendency-vocalize)) {$gte 1 $lte 3}
                                                         (= 2 (read-string tendency-vocalize)) {$gte 1 $lte 2}
-                                                        :else 1)]]) "cats")))
+                                                        :else 1)} {:Tendency-to-Vocalize {$exists false}}]]
+                           ])"cats")))
 
 (defn prefered-dog [request]
   (let [dogs (find-dog request)]
-    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
-    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/prefered-dog.html"
-          (render-file "prefered-dog-template.html" {:items dogs}))
-    (layout/render request "prefered-dog.html")))
+    (layout/render request "prefered-dog-template.html" {:items dogs})))
 
 (defn prefered-cat [request]
   (let [cats (find-cat request)]
-    (selmer.parser/set-resource-path! "C:/Users/Srdjan/pet-eligentis/resources/html")
-    (spit "C:/Users/Srdjan/pet-eligentis/resources/html/prefered-cat.html"
-          (render-file "prefered-cat-template.html" {:items cats}))
-    (layout/render request "prefered-cat.html")))
+    (layout/render request "prefered-cat-template.html" {:items cats})))
 
 (defn pet-pref-dog-page [request]
   (layout/render request "pet-preferences-dog.html"))

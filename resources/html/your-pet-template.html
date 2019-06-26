@@ -12,10 +12,21 @@
                 </header>
                 <section class="modal-card-body">
                     <div class="content">
-                        <p>Pet: <input class="input" type="text" id="pet" name="pet" /></p>
-                        <p>Breed: <input class="input" type="text" id="breed" name="breed" /></p>
-                        <p>Age: <input class="input" type="text" id="age" name="age" /></p>
-                        <p>Name: <input class="input" type="text" id="name" name="name" /></p>
+                        <div class="control">
+                            <label class="radio">
+                              <input type="radio" name="pet" value="dog" checked="checked">
+                              Dog
+                            </label>
+                            <label class="radio">
+                              <input type="radio" name="pet" value="cat">
+                              Cat
+                            </label>
+                          </div>
+                          <br/>
+                        <!--<p>Pet: <input class="input" type="radio" id="pet" name="pet" /></p>-->
+                        <p>Breed: <input class="input" type="text" id="breed" name="breed" required /></p>
+                        <p>Age: <input class="input" type="text" id="age" name="age" required /></p>
+                        <p>Name: <input class="input" type="text" id="name" name="name" required /></p>
                     </div>
                 </section>
                 <footer class="modal-card-foot">
@@ -50,4 +61,9 @@
 </body>
 
 <script src="/js/modal.js"></script>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 {% endblock %}

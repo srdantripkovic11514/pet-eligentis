@@ -2,10 +2,13 @@
 {% block content %}
 
 <body>
+    <div class="content">
+        <h1 class="is-medium">Following breeds suit your needs:</h1>
+    </div>
     <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Breed</th>
                 <th>Adaptability</th>
                 <th>All Around Friendliness</th>
                 <th>Exercise Needs</th>
@@ -15,7 +18,7 @@
         </thead>
         <tbody>
             {% for item in items %}
-            <tr>  
+            <tr>
                 <th>{{item.Name}}</th>
                 <th>{{item.1Adaptability}}</th>
                 <th>{{item.1All-Around-Friendliness}}</th>

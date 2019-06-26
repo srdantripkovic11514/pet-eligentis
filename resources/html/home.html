@@ -1,38 +1,22 @@
 {% extends "base.html" %}
 <style>
-  .container2 {
-    height: 720px;
-    margin: 0;
-    position: absolute;
-    top: 70%;
-    left: 25%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%)
-  }
-
-  .container3 {
-    height: 720px;
-    position: absolute;
-    margin: 0;
-    top: 65%;
-    right: 10%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
 </style>
 {% block content %}
-<h1 style="font-size:60px;">
-  <center>Find your ideal pet!</center>
-</h1>
-
-<div class="container2">
-  <a href="pet-preferences-dog"><img src="/img/ljutiker.jpg" alt="Ljuti keronja" width="400" height="400"
-      style="float:left;"></a>
+<div class="content">
+  <h1 style="font-size:60px;">
+    <center>Find your ideal pet!</center>
+  </h1>
 </div>
 
-<div class="container3">
-  <a href="pet-preferences-cat"><img src="/img/ludamacka.jpg" alt="Luda macketina" width="300" height="300"
+<div class="image-box">
+  <a href="pet-preferences-dog"><img src="/img/find-dog1.png" alt="Ljuti keronja" width="480" height="480"
+      style="float:left"></a>
+</div>
+
+<div class="image-box2">
+  <a href="pet-preferences-cat"><img src="/img/find-cat1.png" alt="Luda macketina" width="400" height="400"
       style="float:right;"></a>
 </div>
+
 
 {% endblock %}

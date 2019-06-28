@@ -27,3 +27,6 @@
 
 (defn find-all [obj coll]
   (mc/find-maps db coll obj))
+
+(defn insert-many [obj coll]
+  (mc/insert-batch db coll obj))

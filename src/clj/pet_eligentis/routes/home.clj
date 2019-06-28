@@ -9,7 +9,8 @@
    [monger.operators :refer :all]))
 
 (defn home-page [request]
-  (layout/render request "home.html"))
+  (layout/render request "home.html" {:fact-dog (db/get (into {} [[:Id (rand-int 386)]]) "dogfacts")
+                                      :fact-cat (db/get (into {} [[:Id (rand-int 36)]]) "catfacts")}))
 
 (defn about-page [request]
   (layout/render request "about.html"))
@@ -22,9 +23,6 @@
     (home-page request)
     (layout/render request "signin.html")))
 
-(defn signin-cookie [request]
-  (layout/render request "home.html"))
-
 (defn signup-page [request]
   (layout/render request "signup.html"))
 
@@ -34,7 +32,7 @@
       (assoc :cookies {"username" {:value id, :max-age 7200}})))
 
 (defn remove-user! [request]
-  (-> (signin-cookie request)
+  (-> (home-page request)
       (assoc :session (dissoc (get request :session) :user))
       (assoc :cookies {"username" {:max-age 0}})))
 
@@ -74,6 +72,12 @@
 
 (defn logout [request]
   (remove-user! request))
+
+(defn delete-pet [request]
+  (let [{{name :name} :params} request]
+    (db/delete (into {} [[:owner (get-in request [:cookies "username" :value])]
+                         [:name name]]) "pets")
+    (show-pet request)))
 
 (defn find-dog [request]
   (let [{{wanderlust :wanderlust-potential kid-friendly-mouthiness :kid_friendly-mthnss
@@ -226,6 +230,7 @@
    ["/pet" {:get pet-page}]
    ["/pet/yourpet" {:post new-pet
                     :get your-pet-page}]
+   ["/pet/deletepet" {:post delete-pet}]
    ["/pet-preferences-dog" {:get pet-pref-dog-page}]
    ["/pet-preferences-cat" {:get pet-pref-cat-page}]
    ["/prefered-cat" {:post prefered-cat}]

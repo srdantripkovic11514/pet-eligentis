@@ -14,16 +14,15 @@
                     <div class="content">
                         <div class="control">
                             <label class="radio">
-                              <input type="radio" name="pet" value="dog" checked="checked">
-                              Dog
+                                <input type="radio" name="pet" value="dog" checked="checked">
+                                Dog
                             </label>
                             <label class="radio">
-                              <input type="radio" name="pet" value="cat">
-                              Cat
+                                <input type="radio" name="pet" value="cat">
+                                Cat
                             </label>
-                          </div>
-                          <br/>
-                        <!--<p>Pet: <input class="input" type="radio" id="pet" name="pet" /></p>-->
+                        </div>
+                        <br />
                         <p>Breed: <input class="input" type="text" id="breed" name="breed" required /></p>
                         <p>Age: <input class="input" type="text" id="age" name="age" required /></p>
                         <p>Name: <input class="input" type="text" id="name" name="name" required /></p>
@@ -36,7 +35,31 @@
         </form>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
-    <table class="table is-striped is-hoverable is-fullwidth">
+
+    <div class="modal" id="myModal1">
+        <form action="/pet/deletepet" method="POST">
+            {% csrf-field %}
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Delete pet</p>
+                </header>
+                <section class="modal-card-body">
+                    <div class="content">
+                        <br />
+                        <p>Name: <input class="input" type="text" id="name" name="name" placeholder="Enter the name of the pet to be deleted" required /></p>
+                    </div>
+                </section>
+
+                <footer class="modal-card-foot">
+                    <button type="submit" class="button is-danger">Delete</button>
+                </footer>
+            </div>
+        </form>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <table class="table is-striped is-hoverable is-fullwidth" id="table">
         <thead>
             <tr>
                 <th>Pet</th>
@@ -58,12 +81,14 @@
     </table>
     <button class="button is-info is-normal modal-button" data-target="#myModal" aria-haspopup="true" id="showModal">Add
         pet</button>
+    <button class="button is-danger modal-button" data-target="#myModal1" aria-haspopup="true" id="showModal1">Delete
+        pet</button>
 </body>
 
 <script src="/js/modal.js"></script>
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 </script>
 {% endblock %}
